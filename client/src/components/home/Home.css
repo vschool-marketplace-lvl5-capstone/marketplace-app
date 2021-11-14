@@ -1,0 +1,25 @@
+/* home styles */
+
+#homeMain {
+	padding-top: 6rem;
+}
+
+/* filter styles */
+
+#filterContainer > * {
+	width: 10rem;
+}
+
+#filterContainer > form > input {
+	width: 10rem;
+}
+
+.cityHidden {
+	display: none;
+}
+
+/* posting styles */
+
+.postingContainer {
+	padding: 1rem 0rem;
+}

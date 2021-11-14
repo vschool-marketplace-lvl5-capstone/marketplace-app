@@ -1,0 +1,127 @@
+/* navbar styles */
+
+#navbar {
+	position: fixed;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-left: 1.5rem;
+	padding-right: 1rem;
+	padding-top: 1.5rem;
+	padding-bottom: 1.5rem;
+	font-weight: bolder;
+	letter-spacing: 0.03rem;
+	color: #d19411d7;
+	z-index: 1;
+}
+
+.scroll {
+	background-color: #5f6585;
+}
+
+#navbarTitle {
+	font-family: "Scheherazade New", serif;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+#navbarTitle:hover {
+	cursor: pointer;
+	color: #a0720e;
+}
+
+#navbarTitle > a {
+	all: unset;
+	font-size: 1.85rem;
+	transition-duration: 0.5s;
+	letter-spacing: 0.18rem;
+	min-width: 188.1px;
+}
+
+#navbarTitle > img {
+	height: 3rem;
+	width: 5.5rem;
+	display: flex;
+}
+
+.navbarLinks,
+.droppedOptions {
+	font-family: "Roboto", sans-serif;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-column-gap: 0.8rem;
+	font-size: 0.8rem;
+	padding-top: 0.5rem;
+}
+
+.navbarLinks > a,
+.droppedOptions > a {
+	all: unset;
+	display: flex;
+	justify-content: center;
+	transition-duration: 0.2s;
+	font-size: 0.9rem;
+}
+
+.navbarLinks > a:hover,
+.droppedOptions > a:hover {
+	cursor: pointer;
+	color: #d19411d7;
+}
+
+#dropper {
+	display: none;
+}
+
+@media only screen and (max-width: 768px) {
+	/* navbar query */
+	.navbarLinks {
+		display: flex;
+	}
+
+	.navbarLinks > a {
+		display: none;
+	}
+
+	.droppedOptions {
+		position: absolute;
+		top: 0;
+		right: 0;
+		border-radius: 7px;
+		background-color: #2e3141;
+		display: flex;
+		flex-direction: column;
+		padding: 1.6rem 0.8rem 0.5rem;
+	}
+
+	.droppedOptions > * {
+		text-decoration: none;
+		color: #d5dadd;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.droppedOptions > *:hover {
+		cursor: pointer;
+		color: rgb(150, 150, 150);
+	}
+
+	.droppedOptions > a {
+		padding: 0.5rem 0rem;
+	}
+
+	#dropper {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 1.5rem;
+	}
+
+	#dropper:hover {
+		cursor: pointer;
+		color: rgb(150, 150, 150);
+	}
+}
