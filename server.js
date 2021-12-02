@@ -5,6 +5,7 @@ require('dotenv').config()
 const morgan = require('morgan')
 const cors = require('cors')
 const mongoose = require('mongoose')
+const expressJwt = require('express-jwt')
 
 
 // port
@@ -35,11 +36,17 @@ app.use(cors({
 }))
 
 // routes
-app.use('/postings', require('./routes/postings'))
+app.use('/auth', require('./routes/authRouter'))
+// requires a secret for any requests
+app.use('/api', expressJwt({ secret: process.env.SECRET, algorithms: ['HS256'] }))
+app.use('/api/postings', require('./routes/postingsRouter'))
 
 // Error handler -- include global error handler in all applications
 app.use((err, req, res, next) => {
     console.log(err)
+    if(err.name === "UnauthorizedError") {
+        res.status(err.status)
+    }
     return res.send({errMsg: err.message})
 })
 

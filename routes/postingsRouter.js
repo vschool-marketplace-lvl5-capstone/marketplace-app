@@ -17,13 +17,24 @@ postingsRouter.get('/', (req, res, next) => {
 })
 
 // get by id
-postingsRouter.get('/:postingId', (req, res, next) => {
+postingsRouter.get('/getone/:postingId', (req, res, next) => {
     Posting.findOne({_id: req.params.postingId}, (err, postingFound) => {
         if(err) {
             res.status(500)
             return next(err)
         }
         return res.status(200).send(postingFound)
+    })
+})
+
+// get by user id
+postingsRouter.get('/mypostings', (req, res, next) => {
+    Posting.find({ user: req.user._id }, (err, postings) => {
+        if(err) {
+            res.status(500)
+            return next(err)
+        }
+        return res.status(200).send(postings)
     })
 })
 
@@ -55,6 +66,7 @@ postingsRouter.get(`/search/city/state`, (req, res, next) => {
 
 // post request
 postingsRouter.post('/', (req, res, next) => {
+    req.body.user = req.user._id
     const newPosting = new Posting(req.body)
     newPosting.save((err, savedPosting) => {
         if(err) {
@@ -69,7 +81,7 @@ postingsRouter.post('/', (req, res, next) => {
 // put request
 postingsRouter.put('/:postingId', (req, res, next) => {
     Posting.findOneAndUpdate(
-        {_id: req.params.postingId}, // finds the posting
+        { _id: req.params.postingId, user: req.user._id }, // finds the posting
         req.body, // updates the posting with new data
         {new: true}, // sends back the updated version
         (err, updatedPosting) => {
@@ -84,7 +96,7 @@ postingsRouter.put('/:postingId', (req, res, next) => {
 
 // delete request
 postingsRouter.delete('/:postingId', (req, res, next) => {
-    Posting.findOneAndDelete({_id: req.params.postingId}, (err, deletedPosting) => {
+    Posting.findOneAndDelete({ _id: req.params.postingId, user: req.user._id }, (err, deletedPosting) => {
         if(err) {
             res.status(500)
             return next(err)
