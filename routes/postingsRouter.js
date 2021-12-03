@@ -27,7 +27,7 @@ postingsRouter.get('/getone/:postingId', (req, res, next) => {
     })
 })
 
-// get by user id
+// get postings by user id
 postingsRouter.get('/mypostings', (req, res, next) => {
     Posting.find({ user: req.user._id }, (err, postings) => {
         if(err) {
@@ -96,7 +96,9 @@ postingsRouter.put('/:postingId', (req, res, next) => {
 
 // delete request
 postingsRouter.delete('/:postingId', (req, res, next) => {
-    Posting.findOneAndDelete({ _id: req.params.postingId, user: req.user._id }, (err, deletedPosting) => {
+    Posting.findOneAndDelete(
+        { _id: req.params.postingId, user: req.user._id }, 
+        (err, deletedPosting) => {
         if(err) {
             res.status(500)
             return next(err)
