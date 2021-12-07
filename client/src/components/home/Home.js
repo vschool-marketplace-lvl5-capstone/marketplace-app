@@ -15,10 +15,10 @@ function Home() {
     // get all postings
     function getPostings() {
         axios.get('/postings')
-        .then(res => {
-            setPostingList(res.data)
-        })
-        .catch(err => console.log(err))
+            .then(res => {
+                setPostingList(res.data)
+            })
+            .catch(err => console.log(err))
     }
 
     // get all postings on mount

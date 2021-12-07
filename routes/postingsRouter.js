@@ -99,11 +99,11 @@ postingsRouter.delete('/:postingId', (req, res, next) => {
     Posting.findOneAndDelete(
         { _id: req.params.postingId, user: req.user._id }, 
         (err, deletedPosting) => {
-        if(err) {
-            res.status(500)
-            return next(err)
-        }
-        return res.status(200).send(`Successfully deleted ${deletedPosting.title} from the database.`)
+            if(err) {
+                res.status(500)
+                return next(err)
+            }
+            return res.status(200).send(`Successfully deleted ${deletedPosting.title} from the database.`)
     })
 })
 
